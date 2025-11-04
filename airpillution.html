@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JNIMS Air Quality Monitor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at center, #4e0000 0%, #120000 80%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff5c5c;
+      text-shadow: 0 0 10px red;
+      margin-bottom: 10px;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 5px red; }
+      100% { text-shadow: 0 0 25px red; }
+    }
+
+    .aqi-box {
+      background: rgba(255, 0, 0, 0.15);
+      border: 2px solid #ff4444;
+      border-radius: 15px;
+      display: inline-block;
+      padding: 25px 40px;
+      margin-top: 30px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    }
+
+    .level {
+      font-size: 2em;
+      font-weight: bold;
+      color: #ffaaaa;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.5; }
+    }
+
+    .aqi {
+      font-size: 3.5em;
+      color: #ff2222;
+      margin-top: 10px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .cause {
+      margin-top: 40px;
+      font-size: 1.4em;
+      color: #ffffa5;
+    }
+
+    .warning {
+      margin-top: 60px;
+      font-size: 1.1em;
+      color: #bbb;
+      opacity: 0.9;
+      line-height: 1.6em;
+    }
+
+    .footer {
+      margin-top: 80px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .sensor {
+      margin-top: 40px;
+      font-size: 1.1em;
+      color: #ff7777;
+    }
+
+    .bar {
+      height: 25px;
+      width: 80%;
+      max-width: 500px;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #330000;
+      border: 1px solid #550000;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 90%;
+      background: linear-gradient(to right, red, orange);
+      animation: fillChange 3s infinite;
+    }
+
+    @keyframes fillChange {
+      0% { width: 85%; }
+      50% { width: 98%; }
+      100% { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>JNIMS Lecture Hall 1</h1>
+
+  <div class="aqi-box">
+    <div class="level">⚠️ Air Pollution Level: <span style="color:#ff5555;">SEVERE</span></div>
+    <div class="aqi" id="aqiValue">AQI 980</div>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+  </div>
+
+  <div class="cause">
+    🚫 Main Cause: <b>Foul Body Odour</b> — Lack of Deodorant Use 😷
+  </div>
+
+  <div class="sensor" id="sensorText">
+    Analyzing air composition... please wait
+  </div>
+
+  <div class="warning">
+    <p>Air quality in this area is <b>hazardous</b>. Ventilation systems have given up.<br>
+    Immediate application of deodorant or perfume is strongly advised.</p>
+  </div>
+
+  <div class="footer">
+    <p>© 2025 JNIMS Environmental Odour Surveillance Division</p>
+  </div>
+
+  <script>
+    // Randomly fluctuate AQI value for realism
+    const aqiDisplay = document.getElementById('aqiValue');
+    const sensorText = document.getElementById('sensorText');
+    const causes = [
+      "Detected compound: Trimethylamine 🧄",
+      "High concentration of body odour molecules 🧬",
+      "Olfactory sensors overloaded 🚨",
+      "Smell threshold exceeded by 400%",
+      "Unknown gas source (likely human origin)"
+    ];
+
+    setInterval(() => {
+      const randomAQI = 950 + Math.floor(Math.random() * 80);
+      aqiDisplay.textContent = "AQI " + randomAQI;
+      sensorText.textContent = causes[Math.floor(Math.random() * causes.length)];
+    }, 1500);
+  </script>
+</body>
+</html>
